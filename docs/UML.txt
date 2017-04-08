@@ -1,0 +1,38 @@
+StockMarketModule
+
+Desc: 	Uses Alphavantage API to pull out financial information.
+	It retrieves both specific equities and, optionally, general information
+	on Sector Performances.
+
+	Every instance is initialized by providing a JSON object with
+	the required initialization keys. This config object is passed
+	along by the constructor to a private method that performs
+	the initialization tasks.
+
+	Makes sequentially ordered calls to the API for each symbol
+	required and finally, if set, a call to retrieve sector performances.
+	
+	Returns a string with all the data from the stock market in
+	every time it is refreshed.
+
+UML:
+
++---------------------------------------------------------------+
+|	             StockMarketModule				|
++---------------------------------------------------------------+
+|- lastRefreshed : Date 					|
+|- interval : TimeInterval					|
+|- timezone : TimeZone						|
+|- symbols : vector<Symbol>					|
+|- includeSectorPerfomances : bool = false			|
+|- baseRequest : HTTPRequest					|
++---------------------------------------------------------------+
+|+ StockMarketModule( config : JSON )				|
+|+ refresh() : string						|
+|- init( config : JSON )					|
+|- setLastRefreshed( Date : lastRefreshed ) : void		|
+|- requestSymbol( Symbol : symbol ) : JSON			|
+|- requestSectorPerformances( Symbol : symbol ) : JSON		|
+|- parseSymbolResponse( response : JSON ) : string		|
+|- parseSectorPerfomancesResponse( response : JSON ) : string	|
++---------------------------------------------------------------+

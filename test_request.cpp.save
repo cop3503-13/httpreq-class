@@ -1,0 +1,41 @@
+
+#include <iostream>
+#include <cstdio> //for stream redirect to log file
+#include "httpreq.h"
+#include "jsonhttpreq.h"
+#include "include/rapidjson/document.h"
+
+
+using namespace std;
+
+int main() 
+{
+	// redirect stderr to error.log
+	// std::freopen("error.log", "w", stderr);
+
+	HTTPReq req = HTTPReq(true);
+	req.setUrl("");
+	req.send();
+	cout << req.getResponse() << endl;
+
+
+
+	/*JSONHTTPReq jsonreq = JSONHTTPReq();
+	jsonreq.setUrl("http://www.alphavantage.co/query?function=SECTOR&apikey=8637");
+	jsonreq.send();
+	
+	rapidjson::Document DOM = jsonreq.getJSONResponse();
+	
+	static const char* kTypeNames[] = { "Null", "False", "True", "Object", "Array", "String", "Number" };
+	
+	for(rapidjson::Value::ConstMemberIterator itr = DOM.MemberBegin(); 
+			itr != DOM.MemberEnd(); ++itr)
+	{
+		printf("Type of member %s is %s\n",
+		    itr->name.GetString(), kTypeNames[itr->value.GetType()]);
+	}*/
+	
+
+	return 0;
+}
+
